@@ -77,7 +77,8 @@ function combineGenes(g1, g2) {
   for (const genes of g1) {
     for (const _genes of g2) {
       punnettCollection.push(
-        sanitizeAlleles([...genes, ..._genes]).flat()
+        [...genes, ..._genes].reverse()
+        // sanitizeAlleles([...genes, ..._genes]).flat()
         // [...genes, ..._genes].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())
         // [...sanitizeAlleles([...genes, ..._genes])[0], ...sanitizeAlleles([...genes, ..._genes])[1]]
       )
