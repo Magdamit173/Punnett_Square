@@ -65,7 +65,7 @@ genetic_inputs.forEach(p => {
 
     if (g1.length % allelesPerTrait !== 0 || g2.length % allelesPerTrait !== 0) {
       punnett_square.style.display = "none"
-      alert("Allele count must be divisible by alleles per trait.")
+      // alert("Allele count must be divisible by alleles per trait.")
       return
     }
 
@@ -74,7 +74,7 @@ genetic_inputs.forEach(p => {
 
     if (traits1 !== traits2) {
       punnett_square.style.display = "none"
-      alert("Both parents must have the same number of traits.")
+      // alert("Both parents must have the same number of traits.")
       return
     }
 
