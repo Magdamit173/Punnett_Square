@@ -1,96 +1,131 @@
+/* Reset & Base */
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 
 body {
-    background-color: lavender;
-    overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6fa;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-.genetic_wrapper {
-    position: sticky;
-    top: 0;
-    left: 0;
+/* Header */
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: #4a90e2;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
 
-    /* display: grid;
-    place-items: center; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
 
-    width: 100dvw;
+header p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
 
-    background-color: bisque;
-    padding: 10px 5vw;
+/* Input Section */
+.input-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .genetic-input {
-    
-    outline: none;
-    margin: 4px 10px;
-    border: solid 0px transparent;
-
-    min-width: 200px;
-    max-width: 500px;
-    width: 70vw;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 1.07em;
-
-    text-indent: 3vw;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  min-width: 250px;
+  max-width: 400px;
+  transition: border-color 0.2s ease;
 }
 
 .genetic-input:focus {
-    scale: 1.05;
-    transition-property: scale;
-    transition-duration: .1s;
-    transition-timing-function: ease;
-    box-shadow: 1px 1px 1px rgba(120, 40, 40, 0.653);
+  border-color: #4a90e2;
+  outline: none;
 }
 
-/* .punnett_square {
-    display: grid;
-
-
-    background-color: aliceblue;
-    height: 100dvh;
-    width: 100dvw;
-
-    padding: 20px 5vw;
-    overflow-x: scroll;
-
-}
-
-.square {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    aspect-ratio: 1/1;
-    border: solid 1px black;
-} */
-
+/* Punnett Square Grid */
 .punnett_square {
-    display: none;
-    grid-auto-rows: 1fr; 
-    background-color: aliceblue;
-    /* height: 100vh; */
-    width: 100vw;
-    padding: 20px 5vw;
-    overflow-x: scroll;
+  display: none;
+  padding: 2rem;
+  background: #fff;
+  width: 100%;
+  overflow-x: auto;
+  grid-auto-rows: 1fr;
+  gap: 4px;
 }
 
 .square {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: solid 1px black;
-    box-sizing: border-box; 
-    aspect-ratio: 1/1;
-    padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e3ecf7;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  aspect-ratio: 1 / 1;
+  padding: 0.5rem;
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #2c3e50;
+  transition: background 0.2s ease;
+}
+
+.square:hover {
+  background: #d0e0f0;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #777;
+  background: #f0f0f0;
+  margin-top: 2rem;
+}
+
+/* Frequency */
+
+.frequency_table {
+  padding: 2rem;
+  background: #fff;
+  width: 100%;
+  overflow-x: auto;
+  margin-top: -1rem;
+}
+
+.freq-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.freq-table th,
+.freq-table td {
+  border: 1px solid #ccc;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.freq-table th {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.freq-table tr:nth-child(even) {
+  background-color: #f9f9f9;
 }

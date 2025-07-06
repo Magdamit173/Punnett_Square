@@ -1,82 +1,49 @@
 import numpy as np
+from itertools import product
+from math import gcd
 
+def sanitize_alleles(alleles, alleles_per_trait=2):
+    """Group alleles into traits of N alleles each (default 2)."""
+    return [sorted(alleles[i:i + alleles_per_trait]) for i in range(0, len(alleles), alleles_per_trait)]
 
-def sanitize_alleles(alleles):
-    list_of_duplicates = []
-    list_of_alleles = []
+def cartesian_product(arrays):
+    """Generate all combinations (like binary expansion for 2 alleles)."""
+    return list(product(*arrays))
 
-    number_of_call = 0
-    overall_call = 0
-
-    for allele_index, allele in enumerate(list(alleles)):
-        for _allele_index, _allele in enumerate(list(alleles)):
-            if (
-                (allele_index == _allele_index)
-                or (allele_index in list_of_duplicates)
-                or (_allele_index in list_of_duplicates)
-            ):
-                continue
-
-            if allele.lower() == _allele.lower():
-                list_of_duplicates.append(_allele_index)
-
-                list_of_alleles.append(sorted([allele, _allele]))
-
-    return list_of_alleles
-
-
-def genetic_info(genetics):
-    allele_structure = []
-
-    alleles = sanitize_alleles(genetics)
-
+def genetic_info(genetics, alleles_per_trait=2):
+    """Generate all possible gametes from a parent's genotype."""
     if not genetics:
-        return
+        return []
 
-    amount_of_traits = len(alleles)  # 3
-    amount_of_alleles = amount_of_traits * 2  # 6
-    amount_of_combinations = pow(2, amount_of_traits)  # 16
-
-    inverted_alleles = [allele[::-1] for allele in alleles]
-
-    for genetic_range in range(amount_of_combinations):
-        cache_structure = []
-        binary_allele = bin(genetic_range)[2:].zfill(amount_of_traits)
-
-        for index, (first_item, second_item) in enumerate(
-            zip(inverted_alleles, list(binary_allele))
-        ):
-            cache_structure.append(first_item[int(second_item)])
-
-        allele_structure.append(cache_structure)
-
-    return allele_structure[::-1]
-
-
-def binary_decoder(binary_allele):
-    structure = []
-
-    for binary in list(binary_allele):
-        if (binary == 0) or (binary == str(0)):
-            structure.append([0, 1])
-        elif (binary == 1) or (binary == str(1)):
-            structure.append([1, 0])
-
-    return structure
-
-
-# print(f'{str(genetic_info("RrYyBb"))}')
-# print(f'{str(genetic_info("RrYy"))}\n{genetic_info("RrYy")}')
-
+    alleles = sanitize_alleles(list(genetics), alleles_per_trait)
+    return cartesian_product(alleles)
 
 def combine_genes(g1, g2):
+    """Combine gametes from both parents into offspring genotypes."""
     punnett_collection = []
 
-    for genes in g1:
-        for _genes in g2:
-            # punnett_collection.append(sorted([*genes, *_genes]))
-            punnett_collection.append( sorted([*genes, *_genes], key = lambda s: (s.capitalize(), s)))
+    for genes1 in g1:
+        for genes2 in g2:
+            combined = [
+                ''.join(sorted([genes1[i], genes2[i]], key=lambda s: (s.upper(), s)))
+                for i in range(len(genes1))
+            ]
+            punnett_collection.append(combined)
 
     return punnett_collection
 
-# print(combine_genes(genetic_info("RrYy"), genetic_info("RrYy")))
+def print_punnett_square(parent1, parent2, alleles_per_trait=2):
+    """Print a formatted Punnett square in the console."""
+    g1 = genetic_info(parent1, alleles_per_trait)
+    g2 = genetic_info(parent2, alleles_per_trait)
+
+    if len(g1[0]) != len(g2[0]):
+        raise ValueError("Trait count mismatch between parents.")
+
+    print(f"\nPunnett Square ({len(g2)} rows × {len(g1)} cols):\n")
+    for row in combine_genes(g2, g1):
+        print(' | '.join(row))
+
+# 🧪 Example usage:
+print_punnett_square("RrYyWw", "RrYyWw", alleles_per_trait=2)
+# print_punnett_square("AABBOO", "AABBOO", alleles_per_trait=3)

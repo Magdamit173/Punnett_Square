@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>punnett_square</title>
-
-
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/main.js" async defer ></script>
-    <script src="assets/js/app.js" async defer ></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Punnett Square Generator</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="assets/js/app.js" defer></script>
 </head>
 <body>
-    <div class="genetic_wrapper" data-genetic_wrapper="">
-        <input type="text" class="genetic-input" data-genetic-input="" placeholder="1st Alleles Here (e.g. Ffbb)">
-        <input type="text" class="genetic-input" data-genetic-input="" placeholder="2nd Alleles Here (e.g. FfBb)">
-    </div>
-    <div class="punnett_square" data-punnett_square="">
+  <header>
+    <h1>Punnett Square Generator</h1>
+    <p>Enter genotypes below to visualize all possible offspring combinations.</p>
+  </header>
 
-    </div>
+  <main>
+    <section class="input-section">
+      <input type="text" class="genetic-input" data-genetic-input placeholder="Parent 1 Alleles (e.g. RrYyWw)" />
+      <input type="text" class="genetic-input" data-genetic-input placeholder="Parent 2 Alleles (e.g. RrYyWw)" />
+    </section>
+
+    <section class="punnett_square" data-punnett_square></section>
+    <section class="frequency_table" data-frequency_table></section>
+  </main>
+
+  <footer>
+    <p>Made with 🧬 by Rovic</p>
+  </footer>
 </body>
 </html>
